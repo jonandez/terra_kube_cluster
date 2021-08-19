@@ -1,0 +1,16 @@
+prod/.terraform/
+prod/.terraform/*
+prod/terraform/
+prod/terraform/*
+
+ 
+prod/kubernetes_cluster/.terraform
+prod/kubernetes_cluster/.terraform/*
+prod/kubernetes_cluster/.terraform*
+
+
+.git/
+./git/
+./git/*
+/git
+git/
