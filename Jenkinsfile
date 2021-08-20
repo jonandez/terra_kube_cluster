@@ -1,6 +1,7 @@
+properties([parameters([choice(choices: 'apply\ndestroy', name: 'action')])])
+
 pipeline {
     agent any
-    
     tools {
         terraform 'terraform'
     }
@@ -13,7 +14,7 @@ pipeline {
         }
         stage ("terraform init") {
             steps {
-                sh "cd prod/kubernetes_cluster/ && terraform init"
+                sh "cd prod/kubernetes_cluster/ && rm terraform.tfstate terraform.tfstate.backup && terraform init"
             }
         }
         stage ("terraform fmt") {
@@ -28,12 +29,12 @@ pipeline {
         }
         stage ("terraform plan") {
             steps {
-                sh "cd prod/kubernetes_cluster/ && rm terraform.tfstate terraform.tfstate.backup && terraform plan -var-file='vars.tfvars'"
+                sh "cd prod/kubernetes_cluster/ && terraform plan -var-file='vars.tfvars'"
             }
         }
-        stage ("terraform apply") {
+        stage ("terraform action") {
             steps {
-                sh "cd prod/kubernetes_cluster/ && terraform apply -var-file='vars.tfvars' --auto-approve"
+                sh "cd prod/kubernetes_cluster/ && terraform ${params.action} -var-file='vars.tfvars' --auto-approve"
             }
         }
     }
