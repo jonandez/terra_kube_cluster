@@ -3,9 +3,15 @@ prod/.terraform/*
 prod/terraform/
 prod/terraform/*
 
+# Local .terraform directories
+**/.terraform/*
+# .tfstate files
+*.tfstate
+*.tfstate.*
  
 prod/kubernetes_cluster/.terraform
-prod/kubernetes_cluster/.terraform/*
+prod/kubernetes_cluster/.terraform/*.tfstate
+prod/kubernetes_cluster/.terraform/*.tfstate.*
 prod/kubernetes_cluster/.terraform*
 
 
