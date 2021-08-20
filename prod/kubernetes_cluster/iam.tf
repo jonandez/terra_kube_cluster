@@ -23,8 +23,8 @@ EOF
 }
 
 # EKS Full access policy
-resource "aws_iam_policy" "eks_full_access" {
-  name        = "eks_full_access"
+resource "aws_iam_policy" "eks_cluster_full_access" {
+  name        = "eks_cluster_full_access"
   description = "EKS access for Jenkins Server"
 
   # Terraform's "jsonencode" function converts a
@@ -45,7 +45,7 @@ resource "aws_iam_policy" "eks_full_access" {
 # Attache policy to Jenkins server role 
 resource "aws_iam_role_policy_attachment" "attachment_eks_policy" {
   role      = aws_iam_role.nodes.name
-  policy_arn = aws_iam_policy.eks_full_access.arn
+  policy_arn = aws_iam_policy.eks_cluster_full_access.arn
 }
 
 // temas de interfaces de red y cosas a nivel de plugins
